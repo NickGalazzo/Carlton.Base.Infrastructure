@@ -3,8 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <OutputType>Library</OutputType>
+   <Authors>Nicholas Galazzo</Authors>
+    <Product>Project Carlton</Product>
+    <Company>Project Carlton</Company>
+    <Description>Contains the base classes and utilities used across the carlton suite.</Description>
+    <RepositoryUrl>git@github.com:NickGalazzo/Carlton.Base.Infrastructure.git</RepositoryUrl>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="9.3.0" />
     <PackageReference Include="MediatR" Version="9.0.0" />
