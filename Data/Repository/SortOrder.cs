@@ -1,8 +1,7 @@
-﻿namespace Carlton.Base.Infrastructure.Data
+﻿namespace Carlton.Base.Infrastructure.Data;
+
+public enum SortOrder
 {
-    public enum SortOrder
-    {
-        Ascending,
-        Descending
-    }
+    Ascending,
+    Descending
 }

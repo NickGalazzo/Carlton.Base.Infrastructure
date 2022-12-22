@@ -1,6 +1,6 @@
-﻿namespace Carlton.Base.Infrastructure.Configuration
+﻿namespace Carlton.Base.Infrastructure.Configuration;
+
+public class CarltonConfiguration
 {
-    public class CarltonConfiguration
-    {
-    }
 }
+

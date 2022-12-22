@@ -1,9 +1,7 @@
-﻿using System;
+﻿namespace Carlton.Base.Infrastructure.Caching;
 
-namespace Carlton.Base.Infrastructure.Caching
+public interface ICacheDurationGenerator
 {
-    public interface ICacheDurationGenerator
-    {
-        TimeSpan GetCacheDuration(object obj);
-    }
+    TimeSpan GetCacheDuration(object obj);
 }
+

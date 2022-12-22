@@ -1,7 +1,7 @@
-﻿namespace Carlton.Base.Infrastructure.Caching
+﻿namespace Carlton.Base.Infrastructure.Caching;
+
+public interface ICacheKeyGenerator
 {
-    public interface ICacheKeyGenerator
-    {
-        string GenerateCacheKey(object obj);
-    }
+    string GenerateCacheKey(object obj);
 }
+

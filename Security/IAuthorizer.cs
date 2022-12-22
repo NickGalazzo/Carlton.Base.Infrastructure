@@ -1,7 +1,7 @@
-﻿namespace Carlton.Base.Infrastructure.Security
+﻿namespace Carlton.Base.Infrastructure.Security;
+
+public interface IAuthorizer
 {
-    public interface IAuthorizer
-    {
-        bool IsAuthorized(object instance);
-    }
+    bool IsAuthorized(object instance);
 }
+

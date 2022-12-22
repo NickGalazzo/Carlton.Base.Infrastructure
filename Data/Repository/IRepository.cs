@@ -1,11 +1,8 @@
-﻿using System.Threading.Tasks;
-
-namespace Carlton.Base.Infrastructure.Data.Repository
+﻿namespace Carlton.Base.Infrastructure.Data.Repository;
+public interface IRepository<T, TId> : IReadOnlyRepository<T, TId>
 {
-    public interface IRepository<T, TId> : IReadOnlyRepository<T, TId>
-    {
-        Task Update(T entity);
-        Task Insert(T entity);
-        Task Delete(T entity);
-    }
+    Task Update(T entity);
+    Task Insert(T entity);
+    Task Delete(T entity);
 }
+

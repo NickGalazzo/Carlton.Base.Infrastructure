@@ -1,35 +1,30 @@
-﻿using FluentValidation;
-using MediatR;
-using Microsoft.Extensions.Logging;
-using System.Threading;
-using System.Threading.Tasks;
+﻿namespace Carlton.Base.Infrastructure.PipelineBehaviors;
 
-namespace Carlton.Base.Infrastructure.PipelineBehaviors
+public class ValidationPipelineBehavior<TRequest, TResponse> : BasePipelineBehavior<TRequest, TResponse>
+    where TRequest : IRequest<TResponse>
 {
-    public class ValidationPipelineBehavior<TRequest, TResponse> : BasePipelineBehavior<TRequest, TResponse>
+    private readonly AbstractValidator<TRequest> _validator;
+
+    public ValidationPipelineBehavior(ILogger logger, AbstractValidator<TRequest> validator) : base(logger)
     {
-        private readonly AbstractValidator<TRequest> _validator;
+        _validator = validator;
+    }
 
-        public ValidationPipelineBehavior(ILogger logger, AbstractValidator<TRequest> validator) : base(logger)
+    public async override Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToke)
+    {
+        Logger.LogDebug($"{RequestType} is about to be validated");
+
+        var result = _validator.Validate(request);
+
+        if(!result.IsValid)
         {
-            _validator = validator;
+            Logger.LogInformation($"{RequestType} failed validation");
+            throw new ValidationException(result.Errors);
         }
 
-        public async override Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
-        {
-            Logger.LogDebug($"{RequestType} is about to be validated");
+        Logger.LogDebug($"{RequestType} passed validation");
 
-            var result = _validator.Validate(request);
-
-            if(!result.IsValid)
-            {
-                Logger.LogInformation($"{RequestType} failed validation");
-                throw new ValidationException(result.Errors);
-            }
-
-            Logger.LogDebug($"{RequestType} passed validation");
-
-            return await next().ConfigureAwait(false);
-        }
+        return await next().ConfigureAwait(false);
     }
 }
+

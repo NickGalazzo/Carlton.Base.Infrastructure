@@ -1,9 +1,7 @@
-﻿using System.Data;
+﻿namespace Carlton.Base.Infrastructure.Data.Connections;
 
-namespace Carlton.Base.Infrastructure.Data.Connections
+public interface IDbConnectionFactory
 {
-    public interface IDbConnectionFactory
-    {
-        IDbConnection Create();
-    }
-}
+    IDbConnection Create();
+};
+

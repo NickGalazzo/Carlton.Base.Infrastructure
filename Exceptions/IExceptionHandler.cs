@@ -1,10 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿namespace Carlton.Base.Infrastructure.Exceptions;
 
-namespace Carlton.Base.Infrastructure.Exceptions
+public interface IExceptionHandler
 {
-    public interface IExceptionHandler
-    {
-        Task HandleException(Exception ex, object requestObject);
-    }
+    Task HandleException(Exception ex, object requestObject);
 }
