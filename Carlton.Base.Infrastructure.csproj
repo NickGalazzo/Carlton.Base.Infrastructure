@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <OutputType>Library</OutputType>
    <Authors>Nicholas Galazzo</Authors>
     <Product>Project Carlton</Product>
@@ -11,16 +11,16 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="9.3.0" />
-    <PackageReference Include="MediatR" Version="9.0.0" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="5.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Polly" Version="7.2.1" />
-    <PackageReference Include="Scrutor" Version="3.3.0" />
-    <PackageReference Include="Sentry" Version="2.1.8" />
+    <PackageReference Include="FluentValidation" Version="11.4.0" />
+    <PackageReference Include="MediatR" Version="11.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Polly" Version="7.2.3" />
+    <PackageReference Include="Scrutor" Version="4.2.0" />
+    <PackageReference Include="Sentry" Version="3.24.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,11 +1,9 @@
-﻿using Carlton.Base.Infrastructure.Caching;
-using MediatR;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
+using MediatR;
 using Newtonsoft.Json;
-using Carlton.Base.Infrastructure.Extensions;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Carlton.Base.Infrastructure.PipelineBehaviors
 {
@@ -26,13 +24,13 @@ namespace Carlton.Base.Infrastructure.PipelineBehaviors
         public override async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
             var key = _cacheKeyGenerator.GenerateCacheKey(JsonConvert.SerializeObject(request));
-            var cachedValue = await _cache.GetAsync<TResponse>(key).ConfigureAwait(false);
+            var cachedValue = await _cache.GetStringAsync(key).ConfigureAwait(false);
 
             if(cachedValue != null)
             {
                 Logger.LogInformation($"{RequestType} Request is retrieving value from Cache");
                 Logger.LogDebug($"object being retrieved from cache: {JsonConvert.SerializeObject(RequestType)}");
-                return cachedValue;
+                return JsonConvert.DeserializeObject<TResponse>(cachedValue);
             }
             else
             {
@@ -46,7 +44,8 @@ namespace Carlton.Base.Infrastructure.PipelineBehaviors
                 Logger.LogInformation($"{nameof(response)} is being placed in memory cache");
                 Logger.LogDebug($"object being placed in cache: {JsonConvert.SerializeObject(response)}");
                 var cacheExpiresIn = _cacheDurationGenerator.GetCacheDuration(response);
-                await _cache.SetAsync(key, response.ToByteArray(), new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = cacheExpiresIn }).ConfigureAwait(false);
+                var serializedResponse = JsonConvert.SerializeObject(response);
+                await _cache.SetStringAsync(key, serializedResponse, new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = cacheExpiresIn }).ConfigureAwait(false);
             }
 
             return response;
