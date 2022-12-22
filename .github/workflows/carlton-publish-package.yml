@@ -11,13 +11,19 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '5.0.101'
-          source-url: https://nuget.pkg.github.com/nicholas.galazzo@gmail.com/index.json
+          dotnet-version: '7.0.101'
+          source-url: https://nuget.pkg.github.com/NickGalazzo/index.json
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}   
+      - name: Restore
+        run: dotnet restore
       - name: Build
         run: dotnet build
+      - name: Test
+        run: dotnet test
       - name: Package
         run: dotnet pack --configuration Release
       - name: Publish
         run: dotnet nuget push bin/Release/${{ github.event.repository.name }}.*.nupkg 
+

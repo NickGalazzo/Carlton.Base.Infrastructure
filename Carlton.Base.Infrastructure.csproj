@@ -8,7 +8,14 @@
     <Company>Project Carlton</Company>
     <Description>Contains the base classes and utilities used across the carlton suite.</Description>
     <RepositoryUrl>git@github.com:NickGalazzo/Carlton.Base.Infrastructure.git</RepositoryUrl>
+    <PackageVersion>1.0.1</PackageVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Utilities\**" />
+    <EmbeddedResource Remove="Utilities\**" />
+    <None Remove="Utilities\**" />
+  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.4.0" />
@@ -21,10 +28,6 @@
     <PackageReference Include="Polly" Version="7.2.3" />
     <PackageReference Include="Scrutor" Version="4.2.0" />
     <PackageReference Include="Sentry" Version="3.24.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Utilities\" />
   </ItemGroup>
 
 </Project>
